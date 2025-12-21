@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36717.8 d17.14
+VisualStudioVersion = 17.14.36717.8
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prabandhan", "Prabandhan\Prabandhan.csproj", "{7451EA9B-1071-4BB8-8C88-94C290793A48}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parbandhan", "Prabandhan\Parbandhan.csproj", "{7451EA9B-1071-4BB8-8C88-94C290793A48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
