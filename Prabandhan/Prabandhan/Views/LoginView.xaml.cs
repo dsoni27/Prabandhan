@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Parbandhan.View
+namespace Parbandhan.Views
 {
     /// <summary>
     /// Interaction logic for LoginView.xaml
@@ -40,13 +40,6 @@ namespace Parbandhan.View
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
-        }
-
-        private void btnLogin_Click(object sender, RoutedEventArgs e)
-        {
-            MainView mainView = new MainView();
-            mainView.Show();
-            this.Hide();
-        }
+        }       
     }
 }

@@ -14,18 +14,21 @@ using System.Windows.Shapes;
 using System.Runtime.InteropServices;
 using System.Runtime;
 using System.Windows.Interop;
+using System.ComponentModel;
+using Parbandhan.ViewModels;
 
-namespace Parbandhan.View
+namespace Parbandhan.Views
 {
     /// <summary>
     /// Interaction logic for MainView.xaml
     /// </summary>
     public partial class MainView : Window
     {
-        public MainView()
+        public MainView(MainViewModel viewModel)
         {
             InitializeComponent();
             this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+            DataContext = viewModel;
         }
 
         [DllImport("user32.dll")]

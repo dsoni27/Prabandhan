@@ -13,6 +13,8 @@
     <Color x:Key="windowBorderColor3">#8A16C1</Color>
 
     <!--Color Palette-->
+    <SolidColorBrush x:Key="BackColor1" Color="#462AD8"/>
+    <SolidColorBrush x:Key="BackColor2" Color="#5459AC"/>
     <SolidColorBrush x:Key="color1" Color="#E285DE"/>
     <SolidColorBrush x:Key="color2" Color="#784DFD"/>
     <SolidColorBrush x:Key="color3" Color="#4ADAEC"/>
@@ -25,6 +27,7 @@
     <SolidColorBrush x:Key="color10" Color="#FBA1AA"/>
     <SolidColorBrush x:Key="color11" Color="#F5F2F2"/>
     <SolidColorBrush x:Key="color12" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="color13" Color="#000000"/>
 
     <!--Font Colors-->
     <SolidColorBrush x:Key="titleColor1" Color="#FFFFFF"/>

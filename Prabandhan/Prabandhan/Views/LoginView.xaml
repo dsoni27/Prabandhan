@@ -1,9 +1,10 @@
-﻿<Window x:Class="Parbandhan.View.LoginView"
+﻿<Window x:Class="Parbandhan.Views.LoginView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Parbandhan.View"
+        xmlns:local="clr-namespace:Parbandhan.Views"
+        xmlns:userCtrl="clr-namespace:Parbandhan.UserControls"
         mc:Ignorable="d"
         Title="LoginView" Height="500" Width="500" 
         WindowStyle="None" ResizeMode="NoResize"
@@ -110,15 +111,36 @@
                 </Grid>
 
                 <StackPanel Width="250" Grid.Row="2" Orientation="Vertical" Margin="0,35,0,0">
+                    <StackPanel.Resources>
+                        <!-- Style to highlight TextBox with red border when it has an error -->
+                        <Style TargetType="TextBox">
+                            <Style.Triggers>
+                                <Trigger Property="Validation.HasError" Value="True">
+                                    <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                                    <Setter Property="BorderBrush" Value="Red"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                        <Style TargetType="PasswordBox">
+                            <Style.Triggers>
+                                <Trigger Property="Validation.HasError" Value="True">
+                                    <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                                    <Setter Property="BorderBrush" Value="Red"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Resources>
+
                     <Image Source="/Images/document-management_1.png" Height="100" Width="100" HorizontalAlignment="Center"/>
                     <TextBlock Text="PARBANDHAN" FontSize="25" FontWeight="Medium" FontFamily="Trebuchet MS" 
                                Foreground="White" HorizontalAlignment="Center"/>
                     <TextBlock Text="Welcome To Asset Parbandhan!" FontSize="12" FontWeight="Medium" FontFamily="Trebuchet MS"
                                Foreground="White" TextWrapping="Wrap" TextAlignment="Center" Margin="0,5,0,0"></TextBlock>
 
-                    <TextBlock Text="Username" FontSize="14" FontWeight="Medium" FontFamily="Trebuchet MS"
+                    <TextBlock Text="Email" FontSize="14" FontWeight="Medium" FontFamily="Trebuchet MS"
                                Foreground="White" Margin="0,35,0,0"></TextBlock>
-                    <TextBox x:Name="txtUsername"
+                    <TextBox x:Name="txtEmail"
+                             Text="{Binding Email, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
                              FontSize="14" FontWeight="Medium" FontFamily="Trebuchet MS" 
                              Foreground="White" CaretBrush="LightGray" BorderBrush="DarkGray"
                              BorderThickness="0,0,0,1" Height="22" VerticalAlignment="Center"
@@ -132,10 +154,12 @@
                                         ViewportUnits="Absolute"/>
                         </TextBox.Background>
                     </TextBox>
+                    <Label Content="{Binding ElementName=txtEmail, Path=(Validation.Errors)[0].ErrorContent}" 
+                           Foreground="Red" FontSize="12" Margin="0,2,0,0"/>
 
                     <TextBlock Text="Password" FontSize="14" FontWeight="Medium" FontFamily="Trebuchet MS"
                                Foreground="White" Margin="0,10,0,0"></TextBlock>
-                    <PasswordBox x:Name="txtPassword"
+                    <!--<PasswordBox x:Name="txtPassword"                               
                                FontSize="14" FontWeight="Medium" FontFamily="Trebuchet MS" 
                                Foreground="White" CaretBrush="LightGray" BorderBrush="DarkGray"
                                BorderThickness="0,0,0,1" Height="22" VerticalAlignment="Center"
@@ -148,7 +172,40 @@
                                         Viewport="0,0,20,20"
                                         ViewportUnits="Absolute"/>
                         </PasswordBox.Background>
-                    </PasswordBox>
+                    </PasswordBox>-->
+                    <userCtrl:PasswordUserControl x:Name="txtPassword"
+                                Password="{Binding Password, ValidatesOnNotifyDataErrors=True}"
+                                FontSize="14" FontWeight="Medium" FontFamily="Trebuchet MS" 
+                                Foreground="White" BorderBrush="DarkGray"
+                                BorderThickness="0,0,0,1" Height="22" VerticalAlignment="Center"
+                                Margin="0,5,0,0" Padding="25,0,0,0">
+                        <userCtrl:PasswordUserControl.Background>
+                            <ImageBrush ImageSource="/Images/password.png" 
+                                        Stretch="Fill" 
+                                        AlignmentX="Left"
+                                        AlignmentY="Center"
+                                        Viewport="0,0,20,20"
+                                        ViewportUnits="Absolute"/>
+                        </userCtrl:PasswordUserControl.Background>
+                    </userCtrl:PasswordUserControl>
+                    <!--<userCtrl:SecureTextBoxUserControl x:Name="txtPassword"
+                                                       SecureText="{Binding SecureText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
+                                                       FontSize="14" FontWeight="Medium" FontFamily="Trebuchet MS" 
+                                                       Foreground="White" BorderBrush="DarkGray"
+                                                       BorderThickness="0,0,0,1" Height="22" VerticalAlignment="Center"
+                                                       Margin="0,5,0,0" Padding="25,0,0,0">
+                        <userCtrl:SecureTextBoxUserControl.Background>
+                            <ImageBrush ImageSource="/Images/password.png" 
+                                        Stretch="Fill" 
+                                        AlignmentX="Left"
+                                        AlignmentY="Center"
+                                        Viewport="0,0,20,20"
+                                        ViewportUnits="Absolute"/>
+                        </userCtrl:SecureTextBoxUserControl.Background>
+                    </userCtrl:SecureTextBoxUserControl>-->
+                    <Label Content="{Binding ElementName=txtPassword, Path=(Validation.Errors)[0].ErrorContent}" 
+                           Foreground="Red" FontSize="12" Margin="0,2,0,0"/>
+
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,50,0,0">
                         <Button x:Name="btnLogin"                            
@@ -157,8 +214,9 @@
                             Foreground="White"
                             FontSize="14"
                             FontFamily="Trebuchet MS"
-                            Cursor="Hand"
-                            Click="btnLogin_Click"
+                            Cursor="Hand"                            
+                            Command="{Binding LoginCommand}"
+                            CommandParameter="{Binding ElementName=txtPassword, Path=Password}"                            
                             Margin="0,0,0,0"
                             ToolTip="Login">
                             <Button.Style>
